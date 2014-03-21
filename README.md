@@ -1,4 +1,0 @@
-base-zumo
-=========
-
-Zumo libraries
