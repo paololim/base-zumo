@@ -31,7 +31,6 @@ unsigned char currentIdx;
 
 // This is the maximum speed the motors will be allowed to turn.
 const int MAX_SPEED = 150; // TODO: What happens when we adjust MAX_SPEED?
-const int MAX_VOLUME = 8;  // TODO: What happens when we adjust MAX_VOLUME?
 
 // These arrays take up a total of 285 bytes of RAM (out of a limit of 1k (ATmega168), 2k (ATmega328), or 2.5k(ATmega32U4))
 unsigned char note[MELODY_LENGTH] = 
@@ -128,7 +127,7 @@ void playSong()
   if (currentIdx < MELODY_LENGTH && !buzzer.isPlaying())
   {
     // play note at max volume
-    buzzer.playNote(note[currentIdx], duration[currentIdx], MAX_VOLUME);
+    buzzer.playNote(note[currentIdx], duration[currentIdx], 10);
     
     // TODO: After playing a note, make the light blink on and off
     
