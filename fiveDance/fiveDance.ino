@@ -1,7 +1,6 @@
 #include <ZumoMotors.h>
 #include <Pushbutton.h>
 
-//#define LED_PIN 13
 #define MAX_SPEED 200
 
 ZumoMotors motors;
@@ -43,9 +42,9 @@ void loop()
 
 
 
-  // 3. Try to spin the robot 360 here by gradually changing the speed of each wheel in appropriate direction
+  // 3. Try to spin the robot 360 here by gradually changing the speed of each wheel in opposing directions
   //    Challenge: Try to make Zumo spin in its current position instead of making another small circle
-  //     a) set each motor to appropriate speed (Hint: You can set motor speed to negative value to reverse)
+  //     a) set each motor to appropriate speed (Hint: You can set motor speed to a negative value to reverse)
   //     b) insert appropriate amount of delay
 
 
