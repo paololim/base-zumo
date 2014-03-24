@@ -29,9 +29,6 @@ Pushbutton button(ZUMO_BUTTON);
 int lastError = 0;
 unsigned char currentIdx;
 
-// This is the maximum speed the motors will be allowed to turn.
-const int MAX_SPEED = 150; // TODO: What happens when we adjust MAX_SPEED?
-
 // These arrays take up a total of 285 bytes of RAM (out of a limit of 1k (ATmega168), 2k (ATmega328), or 2.5k(ATmega32U4))
 unsigned char note[MELODY_LENGTH] = 
 {
@@ -113,12 +110,13 @@ void setup()
 */
 void loop()
 {
-  // TODO: Add code line to make zumo start playing a song
+  // TODO: Add code line to make zumo start playing a song (volume 10)
   
-  // TODO: Add code line to make zumo start following black line
+  // TODO: Add code line to make zumo start following black line (speed 150)
+  
 }
 
-void playSong()
+void playSong(int maxVolume)
 {
   /**
   * Make it play a song
@@ -127,7 +125,7 @@ void playSong()
   if (currentIdx < MELODY_LENGTH && !buzzer.isPlaying())
   {
     // play note at max volume
-    buzzer.playNote(note[currentIdx], duration[currentIdx], 10);
+    buzzer.playNote(note[currentIdx], duration[currentIdx], maxVolume);
     
     // TODO: After playing a note, make the light blink on and off
     
@@ -141,7 +139,7 @@ void playSong()
   }
 }
 
-void followLine()
+void followLine(int maxSpeed)
 {
   /**
   * Line follower look stuff here
@@ -167,22 +165,22 @@ void followLine()
 
   // Get individual motor speeds.  The sign of speedDifference
   // determines if the robot turns left or right.
-  int m1Speed = MAX_SPEED + speedDifference;
-  int m2Speed = MAX_SPEED - speedDifference;
+  int m1Speed = maxSpeed + speedDifference;
+  int m2Speed = maxSpeed - speedDifference;
 
-  // Here we constrain our motor speeds to be between 0 and MAX_SPEED.
-  // Generally speaking, one motor will always be turning at MAX_SPEED
-  // and the other will be at MAX_SPEED-|speedDifference| if that is positive,
+  // Here we constrain our motor speeds to be between 0 and maxSpeed.
+  // Generally speaking, one motor will always be turning at maxSpeed
+  // and the other will be at maxSpeed-|speedDifference| if that is positive,
   // else it will be stationary.  For some applications, you might want to
   // allow the motor speed to go negative so that it can spin in reverse.
   if (m1Speed < 0)
     m1Speed = 0;
   if (m2Speed < 0)
     m2Speed = 0;
-  if (m1Speed > MAX_SPEED)
-    m1Speed = MAX_SPEED;
-  if (m2Speed > MAX_SPEED)
-    m2Speed = MAX_SPEED;
+  if (m1Speed > maxSpeed)
+    m1Speed = maxSpeed;
+  if (m2Speed > maxSpeed)
+    m2Speed = maxSpeed;
 
   motors.setSpeeds(m1Speed, m2Speed);
 }
